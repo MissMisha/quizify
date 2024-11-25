@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Dashboard</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"    />
+    <script>
+        let uid;
+        function fetch()
+        {
+            uid=localStorage.getItem("uid")
+           
+            // alert(subj+diff)
+            document.getElementById("showUser").innerHTML=uid
+                
+        }
+        function open(quizConfig)
+        {
+           console.log(quizConfig.subject);
+            let subj=quizConfig.subject;
+            let diff=quizConfig.difficulty;
+            let count=quizConfig.questionCount;
+            localStorage.setItem("subj",subj)
+            localStorage.setItem("diff",diff)
+            localStorage.setItem("count",count)
+            alert(subj+diff+count)
+            console.log(subj+diff+count)
+            window.location.href="mainquizpage.html"   
+        }
+    </script>
+</head>
+<body onload="fetch();" >
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Quizify</h1>
+            <div class="user-info">
+              <span id="showUser">*</span>
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2 class="card-title">
+                    
+                    Your Stats
+                </h2>
+                <p class="stat">85%</p>
+                <p class="stat-description">Average Score</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">
+                    
+                    Completed Quizzes
+                </h2>
+                <p class="stat">24</p>
+                <p class="stat-description">Across all subjects</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">
+                   
+                    Knowledge Level
+                </h2>
+                <p class="stat">Advanced</p>
+                <p class="stat-description">Keep it up!</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 32px;">
+            <h2 class="card-title">Start a New Quiz</h2>
+            <form id="quiz-form">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="Physics">Physics</a></option>
+                        <option value="Maths">Maths</option>
+                        <option value="Chemistry">Chemistry</option>
+                       
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Difficulty</label>
+                    <select id="diffic" required>
+                        <option value="">Select difficulty</option>
+                        <option value="Easy">Easy</a></option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                       
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="questionCount">Number of Questions: <span id="questionCountValue">10</span></label>
+                    <input type="range" id="questionCount" class="slider" min="5" max="50" step="5" value="10">
+                </div>
+
+                <button type="submit" id="startQuiz" disabled>Start Quiz</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const subjectSelect = document.getElementById('subject');
+        const difficultySelect = document.getElementById('diffic');
+        const questionCountSlider = document.getElementById('questionCount');
+        const questionCountValue = document.getElementById('questionCountValue');
+        const startQuizButton = document.getElementById('startQuiz');
+        const quizForm = document.getElementById('quiz-form');
+
+        function updateStartButton() {
+            startQuizButton.disabled = !subjectSelect.value ;
+        }
+
+        subjectSelect.addEventListener('change', updateStartButton);
+        difficultySelect.addEventListener('change', updateStartButton);
+
+        questionCountSlider.addEventListener('input', (e) => {
+            questionCountValue.textContent = e.target.value;
+        });
+
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const quizConfig = {
+                subject: subjectSelect.value,
+                difficulty: difficultySelect.value,
+                questionCount: questionCountSlider.value
+            };
+            console.log("Starting quiz with:", quizConfig);
+            open(quizConfig);
+            // Here you would typically navigate to the quiz page or start the quiz
+        });
+    </script>
+</body>
+</html>

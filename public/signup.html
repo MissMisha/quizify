@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="./css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"    />
+    <script>
+        $(document).ready(function(){
+            $("#sgnupBtn").click(function(){
+
+
+                let obj={
+                    type:"get",
+                    url:"/save-users",
+                    data:{
+                        txtName:$("#txtName").val(),
+                        txtEmail:$("#txtEmail").val(),
+                        txtPwd:$("#txtPwd").val()
+                    }
+                } 
+                 $.ajax(obj).done(function(resp){
+                     $("#showMsg").html(resp);
+
+                    //alert(JSON.stringify(jsonQuesAry));
+                }).fail(function(err){
+                    alert(err.statusText)
+                })
+                
+            })
+           
+        })
+    </script>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-brain" style="color: #8269ce;font-size:25px"></i>
+            <span>Quizify</span>
+        </a>
+        <nav>
+            <a href="./index.html">Home</a>
+            
+            <a  href="./signup.html">
+
+                <button class="btn primary">Signup</button>
+            </a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-wrapper">
+            
+            <div class="image-side">
+                <div class="image-container"></div>
+            </div>
+            
+           
+            <div class="form-side">
+                <div class="form-content">
+                    <div class="form-header">
+                        <h1> Sign up</h1>
+                        <p>Hey enter your details to create your account</p>
+                    </div>
+                    
+                    <div class="form-body">
+                        <form class="signup-form">
+                            <input type="text" placeholder="Enter your name" id="txtName" name="txtName">
+                            <input type="email" placeholder="Enter your email" id="txtEmail" name="txtEmail">
+                            
+                            <input type="password" placeholder="Password" id="txtPwd" name="txtPwd">
+                            
+                            <button type="button" class="signup-button" id="sgnupBtn">
+                               
+                                <span>Sign Up</span>
+                                
+                            </button>
+                            <span id="showMsg" style="color:green">*</span>
+                        </form>
+                        
+                        <p class="login-link">
+                            Already have an account? 
+                            <a href="./login.html">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

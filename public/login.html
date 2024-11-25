@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"    />
+    <link rel="stylesheet" href="./css/signup.css">
+
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"    />
+
+    <script>
+        $(document).ready(function(){
+            $("#logBtn").click(function(){
+                
+
+                let obj={
+                    type:"get",
+                    url:"/find-user",
+                    data:{
+                        
+                        txtEmail:$("#logEmail").val(),
+                        txtPwd:$("#logPwd").val()
+                       
+                    }
+                   
+                } 
+                 $.ajax(obj).done(function(resp){
+                   
+                     alert(resp);
+
+                     if(resp == "Logged in Successfully")
+                     {
+                        window.location.replace("dashboard.html")
+                     }
+
+                     $("#pwdMsg").html(resp)
+                    //alert(JSON.stringify(jsonQuesAry));
+                }).fail(function(err){
+                    alert(err.statusText)
+                })
+                
+            })
+
+         
+           
+        })
+
+        function setItem()
+        {   
+           
+            let txtEmail=document.getElementById("logEmail").value
+            console.log(txtEmail)
+            // alert(txtEmail);
+            localStorage.setItem("uid",txtEmail)
+            // let uid=localStorage.getItem("uid")
+            // alert(uid)
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-brain" style="color: #8269ce;font-size:25px"></i>
+            <span>Quizify</span>
+        </a>
+        <nav>
+                <button class="btn primary">Log in</button>
+            </a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="form-wrapper">
+          
+            <div class="image-side">
+                <div class="image-container"></div>
+            </div>
+            
+           
+            <div class="form-side">
+                <div class="form-content">
+                    <div class="form-header">
+                        <h1> Log in </h1>
+                        <p>Hey enter your credentials to enter</p>
+                    </div>
+                    
+                    <div class="form-body">
+                        <form class="signup-form">
+                            <input type="text" id="logEmail" placeholder="Enter your email">
+                            
+                            <input type="password" id="logPwd" placeholder="Password"><span id="pwdMsg" style="color:red">*</span>
+                           
+                            <button type="button" class="signup-button" id="logBtn" onClick="setItem()">
+                                Login 
+                            </button>
+                           
+                        </form>
+                        
+                        <p class="login-link">
+                            Don't have an account? 
+                            <a href="./signup.html">Sign up</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
