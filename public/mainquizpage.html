@@ -188,7 +188,7 @@
       </div>
 
       <div class="navigation">
-        <button class="btn btn-outline" id="btnPrev">
+        <button class="btn btn-dark-outline" id="btnPrev">
           <span>Previous</span>
         </button>
 
@@ -268,6 +268,12 @@
     function showQuestion()
     {
     // console.log(i);
+    if(i==0){
+      $("#btnPrev").css("display","none")
+    }
+    else{
+      $("#btnPrev").css("display","inline")
+    }
    
        if(i<=count)
        {
@@ -308,7 +314,7 @@
         {
            
             correct+=1
-            // console.log(correct)
+            console.log(correct)
         }
         else{
             //alert("incorrect")
@@ -319,6 +325,7 @@
      {
         // alert(i);
          i=i+1
+        //  console.log(correct)
 
         if(i==jsonQuesAry.length)
         {
