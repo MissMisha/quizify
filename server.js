@@ -283,4 +283,7 @@ app.get("/check-pwd", function (req, resp) {
 
     })
 })
+app.get("/store-data",function(req,resp){
+    
+})
 
