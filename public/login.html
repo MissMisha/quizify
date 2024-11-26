@@ -15,7 +15,7 @@
         $(document).ready(function(){
             $("#logBtn").click(function(){
                
-
+                var txtEmail;
                 let obj={
                     type:"get",
                     url:"/find-user",
@@ -27,11 +27,12 @@
                     }
                    
                 } 
+               
                  $.ajax(obj).done(function(resp){
-                   
-                     alert(resp);
-                     localStorage.setItem("email",txtEmail)
-
+                    
+                    localStorage.setItem("email",txtEmail)
+                    alert(resp);
+                    
                      if(resp == "Logged in Successfully")
                      {
                         window.location.replace("dashboard.html")

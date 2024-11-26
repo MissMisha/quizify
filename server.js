@@ -302,5 +302,19 @@ app.get("/store-data",function(req,resp){
                 console.log(err);
             }
     })
+
+})
+app.get("/fetch-stored-data",function(req,resp){
+
+    mysql.query("select * from userTestRecord where uid=?",[req.query.email],function(err,result){
+        if(err!=null){
+           resp.send(err.statusText)
+        }
+        else
+        if(result.length!=null){
+            resp.send(result)
+            console.log(result)
+        }
+    })
 })
 

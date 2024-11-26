@@ -6,14 +6,69 @@
     <title>Quiz Dashboard</title>
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"    />
+      <!-- jQuery link -->
+      <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script>
+
+        $(document).ready(function(){
+            var avg=0
+            jsonDataAry=[]
+            let obj={
+                type:"get",
+                url:"/fetch-stored-data",
+                data:{
+                    email:localStorage.getItem("uid")
+                }
+            }
+            $.ajax(obj).done(function(resp){
+                    jsonDataAry=resp;
+                    //   alert(resp);
+                      console.log(resp)
+                if(jsonDataAry.length=="0"){
+                    $("#level").html("Beginner")
+                    $("#stats").html("0")
+                    $("#numbQuizzes").html("0")
+                }
+
+                let uid=jsonDataAry[0].uid;
+                let quizCount=jsonDataAry.length;
+                
+                let total=0,maxMarks=0;
+                for(i=0;i<quizCount;i++)
+                {
+                     total=total+parseFloat(jsonDataAry[i].marks)
+                    maxMarks+=parseFloat(jsonDataAry[i].totalmarks);
+                    
+                 }
+                 avg=(parseFloat(total)/parseFloat(maxMarks))*100;
+                 avg=avg.toPrecision(3)
+
+                 if(avg>=80){
+                    $("#level").html("Advanced")
+                 }
+                 else{
+                   $("#level").html("Beginner")
+                 }
+                //  alert(maxMarks)
+                 $("#stats").html(avg+"%")
+                 $("#numbQuizzes").html(quizCount)
+                      
+                    
+                 }).fail(function(err){
+                     alert(err.statusText)
+                 })
+        })
         let uid;
         function fetch()
         {
-            uid=localStorage.getItem("uid")
+            email=localStorage.getItem("uid")
            
             // alert(subj+diff)
-            document.getElementById("showUser").innerHTML=uid
+            document.getElementById("showUser").innerHTML=email
                 
         }
         function open(quizConfig)
@@ -29,6 +84,7 @@
             console.log(subj+diff+count)
             window.location.href="mainquizpage.html"   
         }
+
     </script>
 </head>
 <body onload="fetch();" >
@@ -47,16 +103,16 @@
                     
                     Your Stats
                 </h2>
-                <p class="stat">85%</p>
+                <p class="stat" id="stats"></p>
                 <p class="stat-description">Average Score</p>
             </div>
 
             <div class="card">
-                <h2 class="card-title">
-                    
+                <h2 class="card-title" >
+                    <p ></p>
                     Completed Quizzes
                 </h2>
-                <p class="stat">24</p>
+                <p class="stat" id="numbQuizzes"></p>
                 <p class="stat-description">Across all subjects</p>
             </div>
 
@@ -65,7 +121,7 @@
                    
                     Knowledge Level
                 </h2>
-                <p class="stat">Advanced</p>
+                <p class="stat" id="level"></p>
                 <p class="stat-description">Keep it up!</p>
             </div>
         </div>

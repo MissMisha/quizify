@@ -157,11 +157,13 @@
 
     <script>
         $(document).ready(function(req,resp){
+           
+           
             let obj={
-                type:get,
+                type:"get",
                 url:"/store-data",
                 data:{
-                    uid:localStorage.getItem("email"),
+                    uid:localStorage.getItem("uid"),
                     subj:localStorage.getItem("subj"),
                     level:localStorage.getItem("diff"),
                     marks:localStorage.getItem("correct"),
@@ -169,10 +171,10 @@
                     
                 }
             }
-            alert(uid+subj+level+marks+totalmarks)
+           
             $.ajax(obj).done(function(resp){
                    
-                   alert(resp);
+                //    alert(resp);
                    
                   //alert(JSON.stringify(jsonQuesAry));
               }).fail(function(err){
