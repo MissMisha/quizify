@@ -61,6 +61,11 @@ app.get("/mainquizpage", function (req, resp) {
     resp.sendFile(path);
 })
 
+app.get("/result", function (req, resp) {
+    let path = __dirname + "/public/result.html"
+    resp.sendFile(path);
+})
+
 app.get("/post-question", function (req, resp) {
     console.log("helo");
 

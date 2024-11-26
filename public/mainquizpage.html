@@ -204,12 +204,13 @@
           </svg>
         </button>
 
+      <a href="./result.html"> 
         <button class="btn btn-primary" id="btnsub">
           <span>Submit Test</span>
           <svg class="icon" viewBox="0 0 24 24">
             <polyline points="9 18 15 12 9 6" />
           </svg>
-        </button>
+        </button></a>
 
       </div>
       
@@ -221,6 +222,7 @@
     $(document).ready(function(){
 
         $("#content").css("display","none")
+        $("#btnsub").css("display","none")
 
         var count;
         var i=0;
@@ -300,7 +302,7 @@
         var selOpt=$('input[name="answer"]:checked').val();
         var index=jsonQuesAry[i].correct_index
         var ans=jsonQuesAry[i].options[index];
-        alert(ans)
+        // alert(ans)
 
         if(selOpt==ans)
         {
@@ -320,6 +322,7 @@
         if(i==jsonQuesAry.length)
         {
         $("#btnNext").css("display","none")
+        $("#btnsub").css("display","inline")
         // alert("Hide Next Button  and show Result Wala Button");
         // alert("Correct number of questions="+correct)
         return;
@@ -327,7 +330,9 @@
     showQuestion();
      })
      $("#btnsub").click(function(){
-      var correct=localStorage.getItem(correct);
+     
+      var correct=localStorage.setItem(correct);
+      
      })
 
      $("#btnPrev").click(function(){
