@@ -225,10 +225,11 @@ app.get("/fetch-options", function (req, resp) {
 
 app.get("/save-users", function (req, resp) {
     console.log(req.query);
-
+    let email=req.query.txtEmail;
     mysql.query("insert into quizUsers values(?,?,?)", [req.query.txtName, req.query.txtEmail, req.query.txtPwd], function (err) {
 
-        if (err == null) {
+        if (err == null && email!='')
+        {
             resp.send("Signup Successfull")
             console.log("Signup Successfull")
         }
@@ -284,6 +285,22 @@ app.get("/check-pwd", function (req, resp) {
     })
 })
 app.get("/store-data",function(req,resp){
+    let uid=req.query.uid;
+    let subj=req.query.subj;
+    let level=req.query.level;
+    let marks=req.query.marks;
+    let totalmarks=req.query.totalmarks;
     
+
+    mysql.query("insert into userTestRecord values(?,?,?,?,?)",[uid,subj,level,marks,totalmarks],function(err){
+        if (err == null)
+            {
+                resp.send("Saved Successfully")
+                console.log("Saved Successfully")
+            }
+            else {
+                console.log(err);
+            }
+    })
 })
 

@@ -14,7 +14,7 @@
     <script>
         $(document).ready(function(){
             $("#logBtn").click(function(){
-                
+               
 
                 let obj={
                     type:"get",
@@ -30,6 +30,7 @@
                  $.ajax(obj).done(function(resp){
                    
                      alert(resp);
+                     localStorage.setItem("email",txtEmail)
 
                      if(resp == "Logged in Successfully")
                      {
