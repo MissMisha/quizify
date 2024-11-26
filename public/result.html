@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result Page</title>
+    <style>
+        /* Custom CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f0f4f8;
+            --bg-card: #ffffff;
+            --text-primary: #1a365d;
+            --text-secondary: #4a5568;
+            --accent-blue: #3182ce;
+            --accent-green: #48bb78;
+            --accent-red: #f56565;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .quiz-result-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-result-card:hover {
+            transform: scale(1.02);
+        }
+
+        .quiz-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .quiz-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            margin-bottom: 20px;
+        }
+
+        .score-current {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-right: 10px;
+        }
+
+        .score-total {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .progress-container {
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease-in-out;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feedback-text {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .retake-button {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .retake-button:hover {
+            background-color: #2c5282;
+            transform: translateY(-2px);
+        }
+
+        .retake-button:active {
+            transform: translateY(1px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-result-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .quiz-result-card {
+                margin: 0 15px;
+                padding: 20px;
+            }
+
+            .score-current {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-result-card" class="quiz-result-card">
+        <!-- Card will be dynamically populated by JavaScript -->
+    </div>
+
+    <script>
+        // Quiz result data (would typically come from backend/state management)
+        const quizResult = {
+            score: 7,
+            totalQuestions: 10,
+            timeTaken: "5 minutes"
+        };
+
+        function getGrade(percentage) {
+            if (percentage >= 90) return "A";
+            if (percentage >= 80) return "B";
+            if (percentage >= 70) return "C";
+            if (percentage >= 60) return "D";
+            return "F";
+        }
+
+        function getFeedback(percentage) {
+            if (percentage >= 90) return "Excellent work! You've mastered this topic.";
+            if (percentage >= 70) return "Good job! You have a solid understanding, but there's room for improvement.";
+            if (percentage >= 50) return "Not bad, but you might want to review the material and try again.";
+            return "It looks like you're struggling with this topic. Don't give up, review the material and try again!";
+        }
+
+        function getGradeColor(percentage) {
+            if (percentage >= 70) return '#48bb78';  // Green for good grades
+            return '#f56565';  // Red for failing grades
+        }
+
+        function renderQuizResult() {
+            const percentage = (quizResult.score / quizResult.totalQuestions) * 100;
+            const grade = getGrade(percentage);
+            const feedback = getFeedback(percentage);
+            const gradeColor = getGradeColor(percentage);
+
+            const cardHTML = `
+                <h2 class="quiz-title">Quiz Results</h2>
+                <p class="quiz-subtitle">You completed the quiz in ${quizResult.timeTaken}</p>
+
+                <div class="score-display">
+                    <span class="score-current">${quizResult.score}</span>
+                    <span class="score-total">/ ${quizResult.totalQuestions}</span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${percentage}%; background-color: ${gradeColor}"></div>
+                </div>
+
+                <div class="grade-badge" style="background-color: ${gradeColor}; color: white;">
+                    Grade: ${grade}
+                </div>
+
+                <p class="feedback-text">${feedback}</p>
+
+                <button class="retake-button" onclick="window.location.href='/quiz'">
+                    Retake Quiz
+                </button>
+            `;
+
+            document.getElementById('quiz-result-card').innerHTML = cardHTML;
+        }
+
+        // Render the quiz result when the page loads
+        document.addEventListener('DOMContentLoaded', renderQuizResult);
+    </script>
+</body>
+</html>
