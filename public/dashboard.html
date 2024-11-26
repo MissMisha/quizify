@@ -73,15 +73,15 @@
         }
         function open(quizConfig)
         {
-           console.log(quizConfig.subject);
+        //    console.log(quizConfig.subject);
             let subj=quizConfig.subject;
             let diff=quizConfig.difficulty;
             let count=quizConfig.questionCount;
             localStorage.setItem("subj",subj)
             localStorage.setItem("diff",diff)
             localStorage.setItem("count",count)
-            alert(subj+diff+count)
-            console.log(subj+diff+count)
+            // alert(subj+diff+count)
+            // console.log(subj+diff+count)
             window.location.href="mainquizpage.html"   
         }
 
