@@ -29,9 +29,13 @@
       <div class="row">
         <h1 class="title">Awesome Quiz Challenge</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button type="button" class="btn btn-outline-primary" id="start">
-            Start Test
-          </button>
+          <!-- --------------spinner---------------- -->
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status" id="spin">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+          <!-- --------------------------------------- -->
         </div>
       </div>
       <br />
@@ -110,7 +114,7 @@
 
     $(document).ready(function(){
 
-        // Turn on loader
+        
 
         var count;
         var i=0;
@@ -138,7 +142,7 @@
                 jsonQuesAry=JSON.parse(resp)
                 // console.log(resp);
 
-                // Turn of Loader 
+                $("#spin").css("display","none")    // spinner off
 
                 //  alert(resp);
                 showQuestion();
