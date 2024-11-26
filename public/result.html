@@ -148,11 +148,15 @@
             }
         }
     </style>
+      <!-- jQuery link -->
+      <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+
     <script>
-        $(document).ready(function(){
-            var correct=localStorage.getItem("correct")
-            console.log(correct)
-        })
+        
     </script>
 </head>
 <body>
@@ -161,11 +165,12 @@
     </div>
 
     <script>
+      
         // Quiz result data (would typically come from backend/state management)
         const quizResult = {
-            score: 7,
-            totalQuestions: 10,
-            timeTaken: "5 minutes"
+            score: localStorage.getItem("correct"),
+            totalQuestions: localStorage.getItem("count"),
+            // timeTaken: "5 minutes"
         };
 
         function getGrade(percentage) {
@@ -196,7 +201,7 @@
 
             const cardHTML = `
                 <h2 class="quiz-title">Quiz Results</h2>
-                <p class="quiz-subtitle">You completed the quiz in ${quizResult.timeTaken}</p>
+                
 
                 <div class="score-display">
                     <span class="score-current">${quizResult.score}</span>
@@ -213,7 +218,7 @@
 
                 <p class="feedback-text">${feedback}</p>
 
-                <button class="retake-button" onclick="window.location.href='/quiz'">
+                <button class="retake-button" onclick="window.location.href='/dashboard.html'">
                     Retake Quiz
                 </button>
             `;

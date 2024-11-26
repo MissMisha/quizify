@@ -231,7 +231,7 @@ body {
 }
 
 .signup-button:hover {
-    background-color: rgb(140, 219, 21); /* indigo-700 */
+    background-color: rgb(206, 21, 219); /* indigo-700 */
 }
 
 .signup-button svg {

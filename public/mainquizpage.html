@@ -226,7 +226,7 @@
 
         var count;
         var i=0;
-        let correct=0;
+        var correct=0;
         var jsonQuesAry;
         // alert("hii")
         // $("#myWindow").on("load", function(){
@@ -268,7 +268,7 @@
     function showQuestion()
     {
     // console.log(i);
-    // console.log(count);
+   
        if(i<=count)
        {
         document.getElementById("numb").innerHTML=i+1;
@@ -308,6 +308,7 @@
         {
            
             correct+=1
+            // console.log(correct)
         }
         else{
             //alert("incorrect")
@@ -329,10 +330,11 @@
         }
     showQuestion();
      })
-     $("#btnsub").click(function(){
      
-      var correct=localStorage.setItem(correct);
-      
+     $("#btnsub").click(function(){
+      console.log(correct);
+      localStorage.setItem("correct",correct);
+      localStorage.setItem("count",count);
      })
 
      $("#btnPrev").click(function(){
