@@ -1,5 +1,6 @@
 let express = require("express");
 let mysql2 = require("mysql2");
+
 let app = express();
 
 let { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, } = require("@google/generative-ai");
@@ -28,6 +29,8 @@ mysql.connect(function (err) {
     }
 })
 
+
+
 app.listen(2008, function (req, resp) {
 
     console.log("Server started :)");
@@ -38,12 +41,17 @@ app.get("/", function (req, resp) {
 })
 
 app.get("/login.html", function (req, resp) {
+    
     let path = __dirname + "/public/login.html"
     resp.sendFile(path)
 })
 
 app.get("/signup", function (req, resp) {
     let path = __dirname + "/public/signup.html"
+    resp.sendFile(path)
+})
+app.get("/dashboard.html", function (req, resp) {
+    let path = __dirname + "/public/dashboard.html"
     resp.sendFile(path)
 })
 
@@ -241,7 +249,7 @@ app.get("/save-users", function (req, resp) {
 
 app.get("/find-user", function (req, resp) {
     console.log(req.query);
-
+    
 
     mysql.query("select * from quizUsers where email=? and pwd=?", [req.query.txtEmail, req.query.txtPwd], function (err, jsonArray) {
         // console.log(jsonArray.length)
