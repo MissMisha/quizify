@@ -136,7 +136,7 @@ app.get("/fetch-some-quest", function (req, resp) {
 
 app.get("/create-ai-quiz", async function (req, resp) {
     
-    let {subj, diff,count} = req.query;
+    let {subj,diff,count} = req.query;
 
     const input = `give me ${count} mcqs in an array of ${subj} of ${diff} level with keys question, array of options, correct_index in JSON format not string.`;
 
@@ -236,10 +236,11 @@ app.get("/save-users", function (req, resp) {
     let email=req.query.txtEmail;
     mysql.query("insert into quizUsers values(?,?,?)", [req.query.txtName, req.query.txtEmail, req.query.txtPwd], function (err) {
 
-        if (err == null && email!='')
+        if (err == null)
         {
             resp.send("Signup Successfull")
             console.log("Signup Successfull")
+        
         }
         else {
             console.log(err);

@@ -306,3 +306,75 @@ footer nav a:hover {
     text-underline-offset: 4px;
     color: rgb(91, 33, 182); /* text-purple-800 */
 }
+
+
+/* -------------------------------- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background: linear-gradient(to right, #be90ef, #eca7d8);
+    color: white;
+  }
+  
+  .hero-content {
+    max-width: 50%;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content .highlight {
+    color: #ffe600;
+    font-weight: bold;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .hero-buttons .btn {
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  .hero-buttons .btn-primary {
+    background: #ffe600;
+    color: #333;
+  }
+  
+  .hero-buttons .btn-primary:hover {
+    background: #ffd200;
+  }
+  
+  .hero-buttons .btn-secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+  
+  .hero-buttons .btn-secondary:hover {
+    background: white;
+    color: #333;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    /* box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); */
+  }
+  

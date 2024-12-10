@@ -26,6 +26,10 @@
                 } 
                  $.ajax(obj).done(function(resp){
                      $("#showMsg").html(resp);
+                     if(resp=="Signup Successfull")
+                     {
+                        location.href="login.html"
+                     }
 
                     //alert(JSON.stringify(jsonQuesAry));
                 }).fail(function(err){
