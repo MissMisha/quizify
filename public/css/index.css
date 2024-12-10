@@ -314,7 +314,7 @@ footer nav a:hover {
     align-items: center;
     justify-content: space-between;
     padding: 50px;
-    background: linear-gradient(to right, #be90ef, #eca7d8);
+    background: linear-gradient(to right, rgb(243, 232, 255), #e795ec);
     color: white;
   }
   
