@@ -13,7 +13,7 @@ let config = {
     dateStrings: true
 }
 
-const genAI = new GoogleGenerativeAI("AIzaSyCl7aOrZSpDPK_8NP-TI5FDnZj-ucft3ZE");
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
 app.use(express.urlencoded("true"));
