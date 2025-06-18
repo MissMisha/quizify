@@ -8,10 +8,10 @@ app.use(cors());
 let { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, } = require("@google/generative-ai");
 
 let config = {
-    host: "127.0.0.1",
-    user: "root",
-    password: "Misha@26",
-    database: "nodequiz",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     dateStrings: true
 }
 
@@ -33,7 +33,7 @@ mysql.connect(function (err) {
 
 
 
-app.listen(2008, function (req, resp) {
+app.listen(process.env.PORT, function (req, resp) {
 
     console.log("Server started :)");
 })
