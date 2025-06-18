@@ -12,7 +12,10 @@ let config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    dateStrings: true
+    dateStrings: true,
+    ssl: {
+    rejectUnauthorized: false
+  }
 }
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
