@@ -4,7 +4,7 @@ let express = require("express");
 let mysql2 = require("mysql2");
 
 let app = express();
-app.use(cors());
+// app.use(cors());
 let { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, } = require("@google/generative-ai");
 
 let config = {
